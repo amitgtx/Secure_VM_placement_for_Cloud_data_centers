@@ -1,1 +1,3 @@
 # Secure_VM_placement_for_Cloud_data_centers
+
+The use of virtualization and resource multiplexing enable commercial cloud providers (e.g., Amazon EC2) to maximize utilization but at the same time introduce new security vulnerabilities. It has been demonstrated that malicious users could launch virtual machines (VM) which are placed co-resident (on the same physical machine) with the target VM. Such placement in turn may lead to cross-VM side-channel attacks to extract sensitive information from the target VM. In this project, we investigate solutions including but not limited to VM placement algorithms to ensure security and privacy for IaaS cloud data centers.
