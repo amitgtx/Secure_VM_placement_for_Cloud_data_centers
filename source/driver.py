@@ -26,11 +26,11 @@ sumCLR = 0.0
 for seedVal in xrange(1, trials+1):
 
 	vmDict, userDict, jobList = parseEucalyptus(traceFile = DatasetFilePath,
-												P_m = P_m,
-												p = p,
-												q = q,
-												seedVal = seedVal
-												)
+							P_m = P_m,
+							p = p,
+							q = q,
+							seedVal = seedVal
+							)
 
 	
 	if(algoCode == "pssf"):
