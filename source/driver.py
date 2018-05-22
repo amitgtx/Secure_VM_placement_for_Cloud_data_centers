@@ -5,16 +5,14 @@ import algorithms
 import metrics
 import classes
 
-#python driver2.py <P-m> <p> <q> <algorithm> <trial> <Ng-p>
+#python driver2.py <P-m> <algorithm> <trial> <Ng-p>
 
 
 P_m = float(sys.argv[1])
-p = float(sys.argv[2])
-q = float(sys.argv[3])
-algoCode = sys.argv[4]
+algoCode = sys.argv[2]
 dataset = "azure"
-trials = int(sys.argv[5])
-Ngp = float(sys.argv[6]) / 100.0	
+trials = int(sys.argv[3])
+Ngp = float(sys.argv[4]) / 100.0	
 
 DatasetFilePath = "azure-trace.txt"
 
@@ -25,8 +23,6 @@ for seedVal in xrange(1, trials+1):
 
 	vmDict, userDict, jobList = azureParser.parse(traceFile = DatasetFilePath,
 							P_m = P_m,
-							p = p,
-							q = q,
 							seedVal = seedVal
 							)
 
