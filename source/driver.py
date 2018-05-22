@@ -28,11 +28,11 @@ for seedVal in xrange(1, trials+1):
 
 	
 	if(algoCode == "pssf"):
-		algorithm = algorithmsNew.algorithmDict[algoCode](int(Ngp * constants.MAX_PMS))
+		algorithm = algorithms.algorithmDict[algoCode](int(Ngp * constants.MAX_PMS))
 	elif(algoCode == "azar"):
-		algorithm = algorithmsNew.algorithmDict[algoCode](int(Ngp * constants.MAX_PMS))
+		algorithm = algorithms.algorithmDict[algoCode](int(Ngp * constants.MAX_PMS))
 	else:
-		algorithm = algorithmsNew.algorithmDict[algoCode]()
+		algorithm = algorithms.algorithmDict[algoCode]()
 
 
 	for jobType, timeStamp, vm in jobList:
