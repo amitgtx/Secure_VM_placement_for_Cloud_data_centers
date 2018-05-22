@@ -3,7 +3,7 @@ import constants
 import classes
 
 
-def parseEucalyptus(traceFile, P_m, seedVal):
+def parse(traceFile, P_m, seedVal):
 
 	random.seed(seedVal)
 
