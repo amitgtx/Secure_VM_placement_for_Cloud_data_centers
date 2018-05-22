@@ -179,7 +179,7 @@ class PreviousCoLocatedUsersFirst:
 
 
 
-class DedicatedHosting:
+class DedicatedInstance:
 
 	def __init__(self):
 		self.datacenter = classes.Datacenter("d")
@@ -339,7 +339,7 @@ algorithmDict = {
 	"wf" : WorstFit,
 	"rp" : RandomPlacement,
 	"pcuf" : PreviousCoLocatedUsersFirst,
-	"dh" : DedicatedHosting,
+	"di" : DedicatedInstance,
 	"azar" : Azar,
 	"pssf" : PreviousSelectedServersFirst
 }
