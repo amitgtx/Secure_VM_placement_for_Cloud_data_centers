@@ -1,11 +1,9 @@
 import sys
 import constants
-from azureParser import parseEucalyptus
-import algorithmsNew
+import azureParser
+import algorithms
 import metrics
-from classes import Datacenter
-
-
+import classes
 
 #python driver2.py <P-m> <p> <q> <algorithm> <trial> <Ng-p>
 
@@ -25,7 +23,7 @@ sumCLR = 0.0
 
 for seedVal in xrange(1, trials+1):
 
-	vmDict, userDict, jobList = parseEucalyptus(traceFile = DatasetFilePath,
+	vmDict, userDict, jobList = azureParser.parse(traceFile = DatasetFilePath,
 							P_m = P_m,
 							p = p,
 							q = q,
