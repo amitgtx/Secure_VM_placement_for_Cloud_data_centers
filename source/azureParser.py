@@ -27,7 +27,7 @@ def parse(traceFile, P_m, seedVal):
 		cores = float(tmp[9])
 		mem = float(tmp[10])
 
-		if((tStart < (86400.0 * 10)) or (tEnd > (86400.0 * 20))): continue
+		if((tStart < (86400.0 * 1)) or (tEnd > (86400.0 * 2))): continue
 
 		if(userID in userDict):
 			user = userDict[userID]
