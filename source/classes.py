@@ -94,11 +94,11 @@ class Pm:
 
 class User:
 
-	def __init__(self, userID, ACL = None):
+	def __init__(self, userID, repScore = None, spread = None, ACL = None):
 		self.userID = userID
 		self.ACL = ACL
-		self.colocatedUsers = set([self])
-		self.residentPms = set()
+		self.repScore = repScore
+		self.spread = spread
 
 
 class Vm:
