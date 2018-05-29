@@ -18,8 +18,6 @@ class Pm:
 		self.attackersVmCount = 0 #Number of attackers VM
 
 		self.userFreq = dict() #Dict of (user, number of vms of the user on this pm)
-		self.groupIndex = None
-		self.hostedUsers = set()
 
 
 	def allocate(self, vm, timeStamp):
@@ -27,14 +25,6 @@ class Pm:
 			self.lastBootTime = timeStamp
 
 		U_curr = vm.user
-		U_curr.residentPms.add(self)
-		self.hostedUsers.add(U_curr)
-
-		for user in self.userFreq.keys():
-			user.colocatedUsers.add(U_curr)
-			U_curr.colocatedUsers.add(user)
-
-
 
 		self.freeCores -= vm.cores
 		self.freeMem -= vm.mem
