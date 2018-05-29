@@ -333,6 +333,63 @@ class PreviousSelectedServersFirst:
 		stop = clock()
 		pm.deallocate(vm, timeStamp+float(stop-start))
 
+class GeneralizedPreviousCoLocatedUsersFirst:
+
+	def __init__(self, x):
+		self.x = x
+		self.datacenter = classes.Datacenter("d")
+		self.totalUsersDuringFirstAllotment = 0.0
+		self.users = set()
+		for i in xrange(constants.MAX_PMS):
+			pmId = self.datacenter.id+"-"+str(i)
+			pm_new = classes.Pm(pmId, constants.MAX_CORES, constants.MAX_MEM)
+			self.datacenter.emptyPms.append(pm_new)
+
+	def placeVM(self, vm, timeStamp):
+		start = clock()
+		datacenter = self.datacenter
+		U_curr = vm.user
+
+		if(U_curr in self.users):
+			eligible_pms = [pm for pm in datacenter.livePms if(pm.check(vm) == True and set(pm.userFreq.keys()).issubset(U_curr.colocatedUsers) == True)]
+			if(len(eligible_pms) != 0):
+				p_k = sorted(eligible_pms, key = lambda pm : pm.freeCores)[0]
+				stop = clock()
+				p_k.allocate(vm, timeStamp + float(stop - start))
+			else:
+				pm_k = datacenter.emptyPms[0]
+				datacenter.emptyPms.remove(pm_k)
+				datacenter.livePms.append(pm_k)
+				stop = clock()
+				pm_k.allocate(vm, timeStamp + float(stop - start))
+
+		else:
+			self.users.add(U_curr)
+			eligible_pms = [pm for pm in datacenter.livePms if(pm.check(vm) == True)]
+			t = random.uniform(0, 1)
+			if(len(eligible_pms) != 0 and (t > self.x)):
+				p_k = random.sample(eligible_pms, 1)[0]
+				self.totalUsersDuringFirstAllotment += len(p_k.userFreq.keys())
+				stop = clock()
+				p_k.allocate(vm, timeStamp+0.0 * float(stop - start))
+			else:
+				pm_k = datacenter.emptyPms[0]
+				datacenter.emptyPms.remove(pm_k)
+				datacenter.livePms.append(pm_k)
+				stop = clock()
+				pm_k.allocate(vm, timeStamp + float(stop - start))
+
+
+	def removeVM(self, vm, timeStamp):
+		start = clock()
+		datacenter = self.datacenter
+		pm = vm.pm
+		stop = clock()
+		pm.deallocate(vm, timeStamp+float(stop-start))
+		if(len(pm.currentVms) == 0):
+			datacenter.livePms.remove(pm)
+			datacenter.emptyPms.append(pm)		
+		
 
 algorithmDict = {
 	"bf" : BestFit,
@@ -341,5 +398,6 @@ algorithmDict = {
 	"pcuf" : PreviousCoLocatedUsersFirst,
 	"di" : DedicatedInstance,
 	"azar" : Azar,
-	"pssf" : PreviousSelectedServersFirst
+	"pssf" : PreviousSelectedServersFirst,
+	"gpcuf" : GeneralizedPreviousCoLocatedUsersFirst
 }
