@@ -21,7 +21,7 @@ def coreUtilization(vmList, pmList, timestamp):
 
 
 def CoLocRes(vmList):
-	BenignUsers = dict() #dict of (Bengin User, Malicious Co-Location)
+	BenignUsers = dict() #dict of (Bengin User, [vms colocated, total vms])
 
 	for vm in vmList:
 		user = vm.user
@@ -30,19 +30,19 @@ def CoLocRes(vmList):
 			continue
 
 		if(user not in BenignUsers):
-			BenignUsers[user] = 0
-			
+			BenignUsers[user] = [0, 0]
+		
+		BenignUsers[user][1] += 1
 		if(vm.colocated == 1):
-			BenignUsers[user] = 1
+			BenignUsers[user][0] += 1
 
 	num = 0.0
 	den = 0.0
 
 	for user in BenignUsers:
-		if(BenignUsers[user] != 1):
-			num += 1
-		den += 1
+		num += user.repScore * float(BenignUsers[user][0]) / float(BenignUsers[user][1])
+		den += user.repScore
 
-	CLR = num / den
+	CLR = 1 - num / den
 
 	return CLR
