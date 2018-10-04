@@ -15,7 +15,7 @@ azureParser.py : This file provides a single a method called parse() which takes
 algorithms.py : This file contains the code of 7 different VM placement algorithms - BestFit, WorstFit, RandomPlacement, PreviousCoLocatedUsersFirst, DedicatedInstance, Azar, PreviousSelectedServersFirst. Each algorithm can been represented as a separate class consiting of 3 methods : init(), placeVM(), removeVM(). The purpose of init() is to initialize the datacenter and PMs within it, placeVM() handles the task of mapping a VM to a PM, removeVM() handles the task of deallocating a VM from the PM.
 
 driver.py : This can be considered as the main file as it is the starting point of execution. It automatically calls all other files in appropriate sequence and finally displays the results. The correct syntax for executing this file from the command line is as follows :
-python driver.py P-m algorithm trial \<k\>
+python driver.py <P-m> <algorithm> <trial> <k>
 
 In the above syntax :
 
