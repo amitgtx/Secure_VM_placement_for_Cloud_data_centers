@@ -10,7 +10,10 @@ constants.py : This file contains some static constants used in the experimental
 
 classes.py : This file contains some of the basic entities related to a cloud infrastructure such as PM (Physical Machine), User (a cloud user), VM (Virtual Machine), Datacenter (the Cloud Datacenter). Each entity has been represented in the form of a distinct Class and has properties (in the form of instance variables) and functionality (in the form of instance method) associated with it.
 
-azureParser.py : This file provides a single a method called parse() which takes traceFile (the path location of cloud trace dataset), P_m (the percentage of malicious cloud users), seedVal (for initializing the Random Number Generator) as input and returns jobList (a list of VM job events sorted by the timestamp). It also instantiates VMs and Users while parsing the dataset and randomly marks P_m % of the instantiated users as malicious.
+azureParser.py : This file provides a single a method called parse() which takes traceFile (the path location of cloud trace dataset), P_m (the percentage of malicious cloud users), seedVal (for initializing the Random Number Generator) as input and returns jobList (a list of VM job events sorted by the timestamp). It also instantiates VMs and Users while parsing the dataset and randomly marks P_m % of the instantiated users as malicious. 
+
+This parser is specifically written for parsing the AZURE VM dataset (https://azurecloudpublicdataset.blob.core.windows.net/azurepublicdataset/trace_data/vmtable/vmtable.csv.gz). A high-level description of the dataset can be found here (https://github.com/Azure/AzurePublicDataset/blob/master/AzurePublicDatasetV1.md) and a description of the columns can be found here (https://azurecloudpublicdataset.blob.core.windows.net/azurepublicdataset/schema.csv).
+
 
 algorithms.py : This file contains the code of 7 different VM placement algorithms - BestFit, WorstFit, RandomPlacement, PreviousCoLocatedUsersFirst, DedicatedInstance, Azar, PreviousSelectedServersFirst. Each algorithm can been represented as a separate class consiting of 3 methods : init(), placeVM(), removeVM(). The purpose of init() is to initialize the datacenter and PMs within it, placeVM() handles the task of mapping a VM to a PM, removeVM() handles the task of deallocating a VM from the PM.
 
